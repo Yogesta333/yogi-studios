@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogi Studios — Music. Animation. Games.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #16161B;
+    --card: #1F1F26;
+    --ink: #F2F0EB;
+    --ink-rgb: 242,240,235;
+    --purple: #9690E8;
+    --coral: #E0714B;
+    --line: rgba(255,255,255,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .handwritten {
+    font-family: 'Caveat', cursive;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(22, 22, 27, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .logo {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--ink);
+  }
+
+  .logo span {
+    color: var(--purple);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  .nav-links a {
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--purple);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--coral);
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 100px 0 120px;
+    overflow: hidden;
+  }
+
+  .hero-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border: 1px dashed var(--purple);
+    border-radius: 999px;
+    color: var(--purple);
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 .accent {
+    color: var(--coral);
+  }
+
+  .hero-sub {
+    max-width: 520px;
+    margin: 0 auto 40px;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(var(--ink-rgb), 0.75);
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 4px 4px 0 var(--purple);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 4px 4px 0 var(--coral);
+  }
+
+  /* Floating character placeholder */
+  .floating-character {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 480px);
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(var(--ink-rgb), 0.4);
+    animation: float 4s ease-in-out infinite;
+    box-shadow: 6px 6px 0 var(--line);
+  }
+
+  .floating-character img,
+  .floating-character video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-16px); }
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section {
+    padding: 100px 0;
+  }
+
+  .section-tag {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--purple);
+    margin-bottom: 4px;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+
+  .section h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .section-intro {
+    max-width: 560px;
+    color: rgba(var(--ink-rgb), 0.7);
+    margin-bottom: 56px;
+  }
+
+  /* ---------- REEL ---------- */
+  .reel-player {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 8px 8px 0 var(--line);
+  }
+
+  .reel-player video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    background: #000;
+  }
+
+  /* ---------- WORK ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .work-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 32px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .work-card:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: 6px 6px 0 var(--line);
+    border-color: var(--purple);
+  }
+
+  .work-media {
+    margin: -32px -32px 0;
+    border-radius: 18px 18px 0 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .work-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .work-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+  }
+
+  .work-card.music .work-icon { background: rgba(127,119,221,0.15); color: var(--purple); }
+  .work-card.animation .work-icon { background: rgba(216,90,48,0.15); color: var(--coral); }
+  .work-card.game .work-icon { background: rgba(255,255,255,0.08); color: var(--ink); }
+
+  .work-card h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.9rem;
+    font-weight: 700;
+  }
+
+  .work-card .work-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(var(--ink-rgb), 0.45);
+    font-weight: 500;
+  }
+
+  .work-card p {
+    font-size: 0.95rem;
+    color: rgba(var(--ink-rgb), 0.7);
+    flex-grow: 1;
+  }
+
+  .work-card .work-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 2px solid var(--coral);
+    align-self: flex-start;
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+  }
+
+  .work-card .work-link:hover {
+    color: var(--coral);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-wrap {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .avatar {
+    flex-shrink: 0;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 4.5rem;
+    border: 3px dashed var(--coral);
+  }
+
+  .about-text p {
+    color: rgba(var(--ink-rgb), 0.75);
+    margin-bottom: 12px;
+    max-width: 560px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--purple);
+    color: var(--purple);
+  }
+
+  .chip .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--coral);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+  }
+
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: rgba(var(--ink-rgb), 0.6);
+  }
+
+  footer .handwritten {
+    font-size: 1.4rem;
+    color: var(--ink);
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-wrap {
+      flex-direction: column;
+      text-align: center;
+      gap: 24px;
+    }
+
+    .about-text p {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links {
+      gap: 18px;
+      font-size: 0.85rem;
+    }
+
+    .hero {
+      padding: 70px 0 80px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    footer .container {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">Yogi<span>Studios</span></div>
+    <div class="nav-links">
+      <a href="#reel">Reel</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <!-- Sketchy SVG decorations -->
+  <svg class="hero-decor" viewBox="0 0 1100 700" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- dashed lines -->
+    <path d="M40,120 C200,60 320,180 480,100" stroke="#7F77DD" stroke-width="2" fill="none" stroke-dasharray="6 8" opacity="0.25"/>
+    <path d="M650,80 C780,160 900,40 1060,140" stroke="#D85A30" stroke-width="2" fill="none" stroke-dasharray="6 8" opacity="0.25"/>
+    <path d="M100,560 C260,500 380,620 560,540" stroke="#7F77DD" stroke-width="2" fill="none" stroke-dasharray="6 8" opacity="0.2"/>
+    <path d="M620,600 C760,650 900,560 1040,610" stroke="#D85A30" stroke-width="2" fill="none" stroke-dasharray="6 8" opacity="0.2"/>
+    <!-- small circles -->
+    <circle cx="90" cy="90" r="5" fill="#D85A30" opacity="0.3"/>
+    <circle cx="500" cy="60" r="3" fill="#7F77DD" opacity="0.35"/>
+    <circle cx="1000" cy="180" r="6" fill="#7F77DD" opacity="0.25"/>
+    <circle cx="980" cy="60" r="4" fill="#D85A30" opacity="0.3"/>
+    <circle cx="60" cy="600" r="4" fill="#7F77DD" opacity="0.3"/>
+    <circle cx="540" cy="650" r="5" fill="#D85A30" opacity="0.25"/>
+    <circle cx="1040" cy="540" r="3" fill="#7F77DD" opacity="0.3"/>
+  </svg>
+
+  <div class="container hero-content">
+    <span class="tag">Melbourne → Spain</span>
+    <h1>Music. Animation. <span class="accent">Games.</span></h1>
+    <p class="hero-sub">Independent creative studio — building worlds through sound, motion, and play.</p>
+    <div class="hero-buttons">
+      <a href="#reel" class="btn btn-primary">Watch my reel</a>
+      <a href="#work" class="btn btn-secondary">See my work</a>
+    </div>
+
+    <!-- Floating character animation -->
+    <div class="floating-character">
+      <video src="assets/gifs/character.mp4" autoplay loop muted playsinline></video>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="reel" class="section">
+    <div class="container">
+      <span class="section-tag reveal">— the studio —</span>
+      <h2 class="reveal">Reel</h2>
+      <p class="section-intro reveal">A quick look at Yogi Studios — music, animation, and games, all in one place.</p>
+
+      <div class="reel-player reveal">
+        <video src="assets/videos/yogi-studios-intro.mp4" controls playsinline poster="assets/images/reel-poster.jpg"></video>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="container">
+      <span class="section-tag reveal">— what I make —</span>
+      <h2 class="reveal">Work</h2>
+      <p class="section-intro reveal">A few of the things I'm building right now, across sound, motion, and interactive play.</p>
+
+      <div class="work-grid">
+        <div class="work-card music reveal">
+          <div class="work-media">
+            <video src="assets/gifs/wacka-clip.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="work-icon">M</div>
+          <span class="work-label">DJ &amp; Production</span>
+          <h3>Music</h3>
+          <p>Original tracks, remixes, and live DJ sets — blending electronic textures with melodic hooks. Available on Spotify and most major platforms.</p>
+          <a href="https://open.spotify.com/artist/3urbIpicPMd85uZjV5Fk9Q?si=JwwtXWf9RL6ZdwvFGVlEGA" target="_blank" rel="noopener" class="work-link">Listen on Spotify →</a>
+        </div>
+
+        <div class="work-card animation reveal">
+          <div class="work-icon">A</div>
+          <span class="work-label">Motion &amp; 2D</span>
+          <h3>Animation</h3>
+          <p>2D animation and motion design for music videos, idents, and short stories.</p>
+          <a href="https://youtu.be/fY0fX7Yse34?si=8kkuzjgMPJmsx7PC" target="_blank" rel="noopener" class="work-link">Watch reel →</a>
+        </div>
+
+        <div class="work-card game reveal">
+          <div class="work-icon">E</div>
+          <span class="work-label">Top-down Survival</span>
+          <h3>Entropy</h3>
+          <p>A MIDI-powered top-down survival game where music drives gameplay — every note shapes the world.</p>
+          <a href="#contact" class="work-link">Play demo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <span class="section-tag reveal">— who I am —</span>
+      <h2 class="reveal">About</h2>
+
+      <div class="about-wrap reveal">
+        <div class="avatar">Y</div>
+        <div class="about-text">
+          <p>I'm Yogi — an independent musician, animator, and game-maker based between Melbourne and Spain. Yogi Studios is where these worlds collide: tracks become visuals, visuals become games, and games get their own soundtracks.</p>
+          <p>I like making things that feel hand-drawn but play like they were built with care — sketchy on the surface, solid underneath.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <span class="section-tag reveal">— say hi —</span>
+      <h2 class="reveal">Contact</h2>
+      <p class="section-intro reveal">Got a project, gig, or collab in mind? Reach out below.</p>
+
+      <div class="chips reveal">
+        <a class="chip" href="https://instagram.com/Yogi" target="_blank" rel="noopener">
+          <span class="dot"></span> Instagram — @Yogi
+        </a>
+        <a class="chip" href="mailto:hello@yogistudios.com">
+          <span class="dot"></span> hello@yogistudios.com
+        </a>
+        <a class="chip" href="https://www.youtube.com/@Mhassa.stardust" target="_blank" rel="noopener">
+          <span class="dot"></span> YouTube
+        </a>
+        <a class="chip" href="#">
+          <span class="dot"></span> yogistudios.com
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span class="handwritten">Yogi Studios © 2026</span>
+    <span>Made in Melbourne</span>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for nav links (CSS already handles it, JS as fallback for older browsers)
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Scroll reveal animation
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
