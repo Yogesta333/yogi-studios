@@ -307,6 +307,14 @@
     display: block;
   }
 
+  .work-media--player {
+    aspect-ratio: unset;
+  }
+  .work-media--player video {
+    height: auto;
+    object-fit: unset;
+  }
+
   .work-icon {
     width: 56px;
     height: 56px;
@@ -571,9 +579,12 @@
         </div>
 
         <div class="work-card animation reveal">
+          <div class="work-media work-media--player">
+            <video src="assets/videos/never-too-old.mp4" controls playsinline poster="assets/images/never-too-old-poster.jpg"></video>
+          </div>
           <div class="work-icon">A</div>
           <span class="work-label">Motion &amp; 2D</span>
-          <h3>Animation</h3>
+          <h3>Never Too Old</h3>
           <p>2D animation and motion design for music videos, idents, and short stories.</p>
           <a href="https://youtu.be/fY0fX7Yse34?si=8kkuzjgMPJmsx7PC" target="_blank" rel="noopener" class="work-link">Watch reel →</a>
         </div>
